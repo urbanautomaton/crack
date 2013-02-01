@@ -4,7 +4,7 @@ require 'test_helper'
 class JsonTest < Test::Unit::TestCase  
   TESTS = {
     %q({"data": "G\u00fcnter"})                   => {"data" => "Günter"},
-		%q({"html": "\u003Cdiv\\u003E"})              => {"html" => "<div>"},
+    %q({"html": "\u003Cdiv\\u003E"})              => {"html" => "<div>"},
     %q({"returnTo":{"\/categories":"\/"}})        => {"returnTo" => {"/categories" => "/"}},
     %q({returnTo:{"\/categories":"\/"}})          => {"returnTo" => {"/categories" => "/"}},
     %q({"return\\"To\\":":{"\/categories":"\/"}}) => {"return\"To\":" => {"/categories" => "/"}},
@@ -45,9 +45,7 @@ class JsonTest < Test::Unit::TestCase
   
   TESTS.each do |json, expected|
     should "decode json (#{json})" do
-      lambda {
-        Crack::JSON.parse(json).should == expected
-      }.should_not raise_error
+      Crack::JSON.parse(json).should == expected
     end
   end
 
